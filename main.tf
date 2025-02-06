@@ -16,13 +16,16 @@ resource "google_compute_subnetwork" "vpc_subnet" {
 resource "google_vpc_access_connector" "serverless_connector" {
   name               = "my-serverless-connector"
   region             = "us-central1"
-  ip_cidr_range      = "10.253.252.96/24"
+  network            = google_compute_network.vpc_network.name
+  #should have /28 mask and unused IP range should be used
+  ip_cidr_range      = "10.8.0.0/28"
+  # instances below range is 200-2000
   min_throughput     = 200
-  max_throughput     = 1000
+  max_throughput     = 300
   machine_type       = "e2-micro"
-  subnet       {
-    name = google_compute_subnetwork.vpc_subnet.name
-  }
+  #subnet       {
+  #  name = google_compute_subnetwork.vpc_subnet.name
+ # }
 
   depends_on = [google_compute_subnetwork.vpc_subnet]
 }
