@@ -16,7 +16,7 @@ resource "google_compute_subnetwork" "vpc_subnet" {
 resource "google_vpc_access_connector" "serverless_connector" {
   name               = "my-serverless-connector"
   region             = "us-central1"
-  ip_cidr_range      = "10.0.0.0/29"
+  ip_cidr_range      = "10.253.252.96/24"
   min_throughput     = 200
   max_throughput     = 1000
   machine_type       = "e2-micro"
