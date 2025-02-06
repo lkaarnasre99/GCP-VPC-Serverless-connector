@@ -8,7 +8,7 @@ resource "google_compute_network" "vpc_network" {
 resource "google_compute_subnetwork" "vpc_subnet" {
   name          = "vpc-test-tf-subnet"
   ip_cidr_range = "10.0.0.0/24"
-  network       = google_compute_network.vpc_network.id
+  network       = google_compute_network.vpc_network.name
   region        = "us-central1"
   private_ip_google_access = true
 }
@@ -16,7 +16,7 @@ resource "google_compute_subnetwork" "vpc_subnet" {
 resource "google_vpc_access_connector" "serverless_connector" {
   name               = "my-serverless-connector"
   region             = "us-central1"
-  network            = google_compute_network.vpc_network.id
+  network            = google_compute_network.vpc_network.name
   ip_cidr_range      = "10.0.0.0/29"
   min_throughput     = 200
   max_throughput     = 1000
